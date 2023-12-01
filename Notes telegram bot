@@ -29,7 +29,12 @@ async def process_start_command(message: types.Message):
 async def process_help_command(message: types.Message):
     global waiting_reply
     waiting_reply = 0
-    await message.reply("This Notes bot helps you keep record of your notes.  you can:\n 1. add a note using /add then the note in the same message.\n 2. delete a note using /delete then its number in the same message.\n 3.see your notes using /show.\n 4.delete all your notes using /stopservice")
+    await message.reply("This Notes bot helps you keep record of your notes. you can:\
+    \n1. add a note using /add then the note in the same message.\
+    \n2. delete a note using /delete then its number in the same message.\
+    \n3. change a note using /edit then the number of the note in the same message.\
+    \n4. see your notes using /show.\
+    \n5. delete all your notes using /stopservice")
 
 @dp.message_handler(commands=['show'])
 async def process_help_command(message: types.Message):
