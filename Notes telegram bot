@@ -37,7 +37,7 @@ async def process_help_command(message: types.Message):
     \n5. delete all your notes using /stopservice")
 
 @dp.message_handler(commands=['show'])
-async def process_help_command(message: types.Message):
+async def process_show_command(message: types.Message):
     id_user = message.from_user.id
     global waiting_reply
     waiting_reply = 0
@@ -52,7 +52,7 @@ async def process_help_command(message: types.Message):
       await bot.send_message(id_user, text)
 
 @dp.message_handler(commands=['add'])
-async def process_help_command(msg: types.Message):
+async def process_add_command(msg: types.Message):
     id_user = msg.from_user.id
     global waiting_reply
     waiting_reply = 0
@@ -66,12 +66,12 @@ async def process_help_command(msg: types.Message):
       await bot.send_message(id_user, "saved!")
 
 @dp.message_handler(commands=['delete'])
-async def process_help_command(msg: types.Message):
+async def process_delete_command(msg: types.Message):
     id_user = msg.from_user.id
     global waiting_reply
     waiting_reply = 0
     if id_user not in data_base:
-      await bot.send_message(id_user, " you have no notes to delete -_-\n amI a joke to you?")
+      await bot.send_message(id_user, " you have no notes to delete -_-\ndo you want me to delete myself?")
     elif len(data_base[id_user]) == 0:
       await bot.send_message(id_user, " you have no notes to delete -_-\nam I a joke to you?")
     elif len(msg.text) == 7:
@@ -87,7 +87,7 @@ async def process_help_command(msg: types.Message):
         await bot.send_message(id_user, "note deleted successfully (I hope it wasn't the wrong one tho x_x)")
 
 @dp.message_handler(commands=['stopservice'])
-async def process_help_command(msg: types.Message):
+async def process_stop_command(msg: types.Message):
   id_user = msg.from_user.id
   global waiting_reply
   waiting_reply = 0
@@ -98,7 +98,7 @@ async def process_help_command(msg: types.Message):
     await bot.send_message(id_user, "you are not in the database -_-")
 
 @dp.message_handler(commands=['edit'])
-async def process_help_command(msg: types.Message):
+async def process_edit_command(msg: types.Message):
     id_user = msg.from_user.id
     global waiting_reply
     waiting_reply = 0
@@ -120,7 +120,7 @@ async def process_help_command(msg: types.Message):
 
 
 @dp.message_handler()
-async def process_help_command(msg: types.Message):
+async def process_without_command(msg: types.Message):
   id_user = msg.from_user.id
   global waiting_reply
   if waiting_reply == -1:
@@ -137,9 +137,6 @@ async def process_help_command(msg: types.Message):
     waiting_reply = 0
   elif waiting_reply == 0:
     await bot.send_message(id_user, "undefined command, please use our /help for info about using the bot")
-
-    
-
 
 if __name__ == '__main__':
     connection.commit()
