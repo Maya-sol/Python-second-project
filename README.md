@@ -7,7 +7,7 @@ This Notes bot helps keeping record of your notes. you can:
     4. see your notes using /show.
     5. delete all your notes using /stopservice
   it also has /start and /help commands.
-
+  
 about the code:
 first we have data_base = {} which is a dictionary that would be used to store the notes.
 global waiting_reply is an integer that would be used to indicate if a function needed further action done after the command but in a separate message. when it's zero, it means no further action is required.
@@ -21,5 +21,7 @@ After every handler with the specified command, we define a function that handle
 5. process_delete_command(msg: types.Message): first it checks if the user has anynotes, if not it sends them a message informing them of that, if they only wrote the command without any numbers it also informs them to put the number after the command, if the number isn't valid it informs them, if everything is in place  the note is deleted and a message is sent.
 6. process_stop_command(msg: types.Message): this function deletes the whole record of notes but not by itself, after making sure the user is in the data_base it sends the user a message asking him to confirm the choice and changes waiting_reply to -1, if the user types the confirmation message, the without_command function deletes the user record completely.
 7. process_edit_command(msg: types.Message): if the user has no notes, isn't in the database or sent the command without the number the functions sends a message to inform them, if they sent a number bigger than the number of their notes or some unvalid number the function also informs them. if everything was in order, the function changes the value of waiting_reply to the number of the note that they want to change.
-8. process_without_command(msg: types.Message): 
+8. process_without_command(msg: types.Message): in case no command was sent, it checks the value of waiting_reply and deals with the text message accordingly. if it's -1 and the user correctly typed the confirmation message, it deletes their record. if it's 0 it sends an error message with /help command. if it's more than 1 it means the note should be edited.
+the rest of the code is just the main where the connection is established.
 
+P.S.: the waiting_reply is set to be 0 in the beginning of every function because if a new command was sent for example (/help) after a command like /edit, we don't want the bot to keep waiting for a message without commands or treat the new command message as a response.
