@@ -25,3 +25,6 @@ After every handler with the specified command, we define a function that handle
 the rest of the code is just the main where the connection is established.
 
 P.S.: the waiting_reply is set to be 0 in the beginning of every function because if a new command was sent for example (/help) after a command like /edit, we don't want the bot to keep waiting for a message without commands or treat the new command message as a response.
+
+How to Run:
+To run the code, first you need to have some IDE with python compiler like thonny, visual studio, .....etc. then you need to install all of the mintioned libraries (using pip install in command prompt), which are:  nest_asyncio, aiogram, aiogram.utils, asyncio, sqlite3, contextlib (different versions might be needed according to what ide you are using. then you can run the code on your IDE.
